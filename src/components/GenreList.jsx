@@ -79,8 +79,20 @@ const GenreList = () => {
               className="checkBox"
               type="checkbox"
               checked={!!selectedGenres[genre.name]}
-              onChange={() => handleCheckboxChange(genre.name)}
-            ></input>
+              onChange={() => {
+                if (genre.name === "All") {
+                  const allSelected = selectedGenres[genre.name];
+                  setSelectedGenres(
+                    genres.reduce((acc, g) => {
+                      acc[g.name] = !allSelected;
+                      return acc;
+                    }, {})
+                  );
+                } else {
+                  handleCheckboxChange(genre.name);
+                }
+              }}
+            />
           </div>
         ))}
       </div>
