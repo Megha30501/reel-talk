@@ -72,7 +72,7 @@ const GenreList = () => {
         {genres.map((genre, index) => (
           <div
             key={index}
-            className={`flex p-4 rounded-lg shadow-lg border-2 border-gray-400 justify-between ${
+            className={`flex p-2 rounded-lg shadow-lg border-2 border-gray-400 justify-between ${
               selectedGenres[genre.name]
                 ? "bg-yellow-500 border-none"
                 : "bg-gray-100"
