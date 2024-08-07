@@ -1,9 +1,10 @@
 import "./App.css";
+import GenreList from "./components/GenreList";
 
 function App() {
   return (
     <>
-      <div className="h2 center text-green-500">Hello world</div>
+      <GenreList />
     </>
   );
 }
