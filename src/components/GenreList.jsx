@@ -78,6 +78,15 @@ const GenreList = () => {
           </div>
         ))}
       </div>
+      <div className="flex justify-center space-between mt-8 ">
+        <button className="text-white py-2 pr-20 pl-20 rounded border-2 border-slate-100">
+          Back
+        </button>
+        <span className="mx-2"></span>
+        <button className="text-white py-2 pr-20 pl-20 rounded disabled:opacity-50 cursor-not-allowed bg-gray-400">
+          Next
+        </button>
+      </div>
     </div>
   );
 };
