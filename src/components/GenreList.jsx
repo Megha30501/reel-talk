@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ProgressBar from "./ProgressBar";
 
 const genres = [
   { name: "All", emoji: "" },
@@ -53,6 +54,7 @@ const GenreList = () => {
   };
   return (
     <div className="">
+      <ProgressBar currentStep={3} />
       {/* displaying title */}
       <h2 className="text-2xl text-center my-8">
         Select your top 5 genres for movies and TV
