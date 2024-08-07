@@ -63,7 +63,11 @@ const GenreList = () => {
         {genres.map((genre, index) => (
           <div
             key={index}
-            className="flex p-4 rounded-lg shadow-lg bg-gray-100 border-2 border-gray-400 justify-between"
+            className={`flex p-4 rounded-lg shadow-lg border-2 border-gray-400 justify-between ${
+              selectedGenres[genre.name]
+                ? "bg-yellow-500 border-none"
+                : "bg-gray-100"
+            }`}
           >
             {/* displaying name of genre and emoji */}
             <div className="flex">
