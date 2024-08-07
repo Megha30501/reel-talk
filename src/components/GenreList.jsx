@@ -52,6 +52,15 @@ const GenreList = () => {
       return newState;
     });
   };
+
+  // check if at least three genres are selected
+  const selectedCount = Object.values(selectedGenres).filter(Boolean).length;
+  const isNextEnabled = selectedCount >= 3;
+
+  const handleNextClick = () => {
+    console.log("Next button is clicked");
+  };
+
   return (
     <div className="">
       <ProgressBar currentStep={3} />
@@ -96,12 +105,21 @@ const GenreList = () => {
           </div>
         ))}
       </div>
+      {/* buttons */}
       <div className="flex justify-center space-between mt-8 ">
         <button className="text-white py-2 pr-20 pl-20 rounded border-2 border-slate-100">
           Back
         </button>
         <span className="mx-2"></span>
-        <button className="text-white py-2 pr-20 pl-20 rounded disabled:opacity-50 cursor-not-allowed bg-gray-400">
+        <button
+          className={`text-white py-2 pr-20 pl-20 rounded ${
+            isNextEnabled
+              ? "bg-yellow-400 cursor-pointer"
+              : "bg-gray-400 cursor-not-allowed"
+          } `}
+          disabled={!isNextEnabled}
+          onClick={handleNextClick}
+        >
           Next
         </button>
       </div>
