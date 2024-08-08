@@ -9,14 +9,22 @@ const TopFiveSelection = ({ selectedMovies }) => {
           {[...Array(5)].map((_, index) => (
             <div
               key={index}
-              className="w-16 h-24 border-dashed border-white border-2 mx-2"
+              className="w-16 h-24 border-dashed border-white border-2 mx-2 relative"
             >
               {selectedMovies[index] && (
-                <img
-                  src={selectedMovies[index].image}
-                  alt={selectedMovies[index].name}
-                  className="w-full h-full object-cover"
-                />
+                <>
+                  <img
+                    src={selectedMovies[index].image}
+                    alt={selectedMovies[index].name}
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    className="selected-indicator-dotted absolute top-1 right-1"
+                    onClick={() => handleIndicatorClick(index)}
+                  >
+                    <div className="dotted-circle"></div>
+                  </button>
+                </>
               )}
             </div>
           ))}
