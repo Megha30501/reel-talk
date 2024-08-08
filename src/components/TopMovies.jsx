@@ -9,6 +9,7 @@ import flipped from "../assets/images/flipped.png";
 import darkknight from "../assets/images/darkknight.png";
 
 const TopMovies = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const movies = [
@@ -19,6 +20,11 @@ const TopMovies = () => {
     { name: "Flipped (2010)", image: flipped },
     { name: "The Dark Knight (2008)", image: darkknight },
   ];
+
+  // Filter movies based on the search query
+  const filteredMovies = movies.filter((movie) =>
+    movie.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="">
@@ -37,7 +43,7 @@ const TopMovies = () => {
       </div>
       {/* SearchBar */}
       <div className="SearchBar">
-        <SearchBar />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </div>
       {/* Movies */}
       <div className="mb-5">
@@ -46,14 +52,14 @@ const TopMovies = () => {
             Movies you might like
           </div>
           <div className="flex space-x-6 ml-48">
-            {movies.map((movie) => (
+            {filteredMovies.map((movie) => (
               <div
                 key={movie.name}
                 className="text-center cursor-pointer"
                 onClick={() => setSelectedMovie(movie.name)}
               >
                 <div
-                  className={`w-28 h-23 border-2 ${
+                  className={`relative w-28 h-23 border-2 ${
                     selectedMovie === movie.name
                       ? "border-yellow-400"
                       : "border-transparent"
@@ -64,6 +70,9 @@ const TopMovies = () => {
                     alt={movie.name}
                     className="w-full h-full object-cover"
                   />
+                  {selectedMovie === movie.name && (
+                    <div className="absolute top-1 right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-yellow-500" />
+                  )}
                 </div>
                 <div className="w-28 text-[15px] justify-center overflow-hidden font-thin mt-2">
                   {movie.name}
