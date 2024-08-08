@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
+import { useNavigate } from "react-router-dom";
 
 const genres = [
   { name: "All", emoji: "" },
@@ -39,6 +40,8 @@ const genres = [
 
 const GenreList = () => {
   const [selectedGenres, setSelectedGenres] = useState({});
+  const navigate = useNavigate();
+
   // function to handle the checkbox
   const handleCheckboxChange = (genreName) => {
     setSelectedGenres((prevState) => {
@@ -59,6 +62,9 @@ const GenreList = () => {
 
   const handleNextClick = () => {
     console.log("Next button is clicked");
+    if (isNextEnabled) {
+      navigate("/TopMovies");
+    }
   };
 
   return (
