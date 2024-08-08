@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import SearchBar from "./SearchBar";
+import TopFiveSelection from "./TopFiveSelection";
 import shawshank from "../assets/images/shawshank.png";
 import inception from "../assets/images/inception.png";
 import intouchables from "../assets/images/intouchables.png";
@@ -58,10 +59,10 @@ const TopMovies = () => {
       {/* Movies */}
       <div className="mb-5">
         <div className="container mx-auto">
-          <div className="text-xl mb-4 text-start ml-48 font-extralight">
+          <div className="text-xl mb-4 text-start ml-[13.3rem]">
             Movies you might like
           </div>
-          <div className="flex space-x-6 ml-48">
+          <div className="flex justify-center space-x-6">
             {filteredMovies.map((movie) => (
               <div
                 key={movie.name}
@@ -93,6 +94,10 @@ const TopMovies = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="Top5Selection">
+        <TopFiveSelection />
       </div>
     </div>
   );
