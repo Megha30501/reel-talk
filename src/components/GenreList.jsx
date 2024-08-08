@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Title from "./Title";
 import ProgressBar from "./ProgressBar";
 import { useNavigate } from "react-router-dom";
 
@@ -42,16 +43,22 @@ const GenreList = () => {
   const [selectedGenres, setSelectedGenres] = useState({});
   const navigate = useNavigate();
 
-  // function to handle the checkbox
   const handleCheckboxChange = (genreName) => {
     setSelectedGenres((prevState) => {
-      const newState = {
-        ...prevState,
-        [genreName]: !prevState[genreName],
-      };
+      const newState = { ...prevState };
+      // If "All" is clicked, toggle all genres
+      if (genreName === "All") {
+        const areAllSelected = genres.every((g) => newState[g.name]);
+        genres.forEach((g) => {
+          newState[g.name] = !areAllSelected;
+        });
+      } else {
+        newState[genreName] = !newState[genreName];
+      }
       console.log(
         `${genreName} is ${newState[genreName] ? "checked" : "unchecked"}`
       );
+
       return newState;
     });
   };
@@ -68,12 +75,15 @@ const GenreList = () => {
   };
 
   return (
-    <div className="">
+    <div className="h-screen">
+      {/* ProgessBar */}
+
       <ProgressBar currentStep={3} />
-      {/* displaying title */}
-      <h2 className="text-2xl text-center my-8">
-        Select your top 5 genres for movies and TV
-      </h2>
+
+      {/* Displaying title */}
+      <Title title={" Select your top 5 genres for movies and TV"} />
+
+      {/* Mapping the generes here */}
       <div className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-black">
         {genres.map((genre, index) => (
           <div
@@ -94,35 +104,25 @@ const GenreList = () => {
               className="checkBox"
               type="checkbox"
               checked={!!selectedGenres[genre.name]}
-              onChange={() => {
-                if (genre.name === "All") {
-                  const allSelected = selectedGenres[genre.name];
-                  setSelectedGenres(
-                    genres.reduce((acc, g) => {
-                      acc[g.name] = !allSelected;
-                      return acc;
-                    }, {})
-                  );
-                } else {
-                  handleCheckboxChange(genre.name);
-                }
-              }}
+              onChange={() => handleCheckboxChange(genre.name)}
             />
           </div>
         ))}
       </div>
       {/* buttons */}
-      <div className="flex justify-center space-between mt-8 ">
-        <button className="text-white py-2 pr-20 pl-20 rounded border-2 border-slate-100">
+      <div className="flex justify-center space-between mt-8">
+        {/* Back Button */}
+        <button className="text-white py-2 px-20 rounded border-2 border-slate-100">
           Back
         </button>
-        <span className="mx-2"></span>
+        <span className="mx-2" />
+        {/* Next Button */}
         <button
-          className={`text-white py-2 pr-20 pl-20 rounded ${
+          className={` py-2 px-20 rounded ${
             isNextEnabled
-              ? "bg-yellow-400 cursor-pointer"
-              : "bg-gray-400 cursor-not-allowed"
-          } `}
+              ? "bg-yellow-400 cursor-pointer font-bold text-black"
+              : "bg-gray-400 cursor-not-allowed text-white"
+          }`}
           disabled={!isNextEnabled}
           onClick={handleNextClick}
         >
