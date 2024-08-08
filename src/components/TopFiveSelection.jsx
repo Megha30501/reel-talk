@@ -1,6 +1,6 @@
 import React from "react";
 
-const TopFiveSelection = ({ selectedMovies }) => {
+const TopFiveSelection = ({ handleMovieSelect, selectedMovies }) => {
   return (
     <div className="flex justify-center items-center">
       <div className="flex flex-col items-center">
@@ -20,7 +20,7 @@ const TopFiveSelection = ({ selectedMovies }) => {
                   />
                   <button
                     className="selected-indicator-dotted absolute top-1 right-1"
-                    onClick={() => handleIndicatorClick(index)}
+                    onClick={() => handleMovieSelect(selectedMovies[index])}
                   >
                     <div className="dotted-circle"></div>
                   </button>

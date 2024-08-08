@@ -108,7 +108,10 @@ const TopMovies = () => {
       </div>
 
       <div className="Top5Selection">
-        <TopFiveSelection selectedMovies={selectedMovies} />
+        <TopFiveSelection
+          selectedMovies={selectedMovies}
+          handleMovieSelect={handleMovieSelect}
+        />
       </div>
     </div>
   );
