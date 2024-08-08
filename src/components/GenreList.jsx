@@ -75,59 +75,66 @@ const GenreList = () => {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen flex flex-col justify-between">
       {/* ProgessBar */}
-
-      <ProgressBar currentStep={3} />
-
-      {/* Displaying title */}
-      <Title title={" Select your top 5 genres for movies and TV"} />
-
-      {/* Mapping the generes here */}
-      <div className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-black">
-        {genres.map((genre, index) => (
-          <div
-            key={index}
-            className={`flex p-2 rounded-lg shadow-lg border-2 border-gray-400 justify-between ${
-              selectedGenres[genre.name]
-                ? "bg-yellow-500 border-none"
-                : "bg-gray-100"
-            }`}
-          >
-            {/* displaying name of genre and emoji */}
-            <div className="flex">
-              <span className="text-2xl mr-1">{genre.emoji}</span>
-              <span className="text-lg font-semibold">{genre.name}</span>
-            </div>
-            {/* displaying checkbox */}
-            <input
-              className="checkBox"
-              type="checkbox"
-              checked={!!selectedGenres[genre.name]}
-              onChange={() => handleCheckboxChange(genre.name)}
-            />
-          </div>
-        ))}
+      <div className="ProgressBar">
+        <ProgressBar currentStep={3} />
       </div>
-      {/* buttons */}
-      <div className="flex justify-center space-between mt-8">
-        {/* Back Button */}
-        <button className="text-white py-2 px-20 rounded border-2 border-slate-100">
-          Back
-        </button>
-        <span className="mx-2" />
-        {/* Next Button */}
-        <button
-          className={` py-2 px-20 rounded ${
-            isNextEnabled
-              ? "bg-yellow-400 cursor-pointer font-bold text-black"
-              : "bg-gray-400 cursor-not-allowed text-white"
-          }`}
-          disabled={!isNextEnabled}
-          onClick={handleNextClick}
-        >
-          Next
-        </button>
+
+      <div className="Headers">
+        {/* Displaying title */}
+        <Title title={" Select your top 5 genres for movies and TV"} />
+      </div>
+
+      <div className="Checkbox">
+        {/* Mapping the generes here */}
+        <div className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-black">
+          {genres.map((genre, index) => (
+            <div
+              key={index}
+              className={`flex p-2 rounded-lg shadow-lg border-2 border-gray-400 justify-between ${
+                selectedGenres[genre.name]
+                  ? "bg-yellow-500 border-none"
+                  : "bg-gray-100"
+              }`}
+            >
+              {/* displaying name of genre and emoji */}
+              <div className="flex">
+                <span className="text-2xl mr-1">{genre.emoji}</span>
+                <span className="text-lg font-semibold">{genre.name}</span>
+              </div>
+              {/* displaying checkbox */}
+              <input
+                className="checkBox"
+                type="checkbox"
+                checked={!!selectedGenres[genre.name]}
+                onChange={() => handleCheckboxChange(genre.name)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="Buttons">
+        {/* buttons */}
+        <div className="flex justify-center space-between mt-8">
+          {/* Back Button */}
+          <button className="text-white py-2 px-20 rounded border-2 border-slate-100">
+            Back
+          </button>
+          <span className="mx-2" />
+          {/* Next Button */}
+          <button
+            className={` py-2 px-20 rounded ${
+              isNextEnabled
+                ? "bg-yellow-400 cursor-pointer font-bold text-black"
+                : "bg-gray-400 cursor-not-allowed text-white"
+            }`}
+            disabled={!isNextEnabled}
+            onClick={handleNextClick}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

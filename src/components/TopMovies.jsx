@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
+import Title from "./Title";
 import SearchBar from "./SearchBar";
 import TopFiveSelection from "./TopFiveSelection";
 import shawshank from "../assets/images/shawshank.png";
@@ -9,110 +10,114 @@ import walle from "../assets/images/walle.png";
 import flipped from "../assets/images/flipped.png";
 import darkknight from "../assets/images/darkknight.png";
 
+const moviesData = [
+  { name: "The Shawshank Redemption (1994)", image: shawshank },
+  { name: "Inception (2010)", image: inception },
+  { name: "Intouchables (2011)", image: intouchables },
+  { name: "WALL·E (2008)", image: walle },
+  { name: "Flipped (2010)", image: flipped },
+  { name: "The Dark Knight (2008)", image: darkknight },
+];
+
 const TopMovies = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMovies, setSelectedMovies] = useState([]);
 
-  const movies = [
-    { name: "The Shawshank Redemption (1994)", image: shawshank },
-    { name: "Inception (2010)", image: inception },
-    { name: "Intouchables (2011)", image: intouchables },
-    { name: "WALL·E (2008)", image: walle },
-    { name: "Flipped (2010)", image: flipped },
-    { name: "The Dark Knight (2008)", image: darkknight },
-  ];
-
   // Filter movies based on the search query
-  const filteredMovies = movies.filter((movie) =>
+  const filteredMovies = moviesData.filter((movie) =>
     movie.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Handle movie selection/deselection
   const handleMovieSelect = (selectedMovie) => {
     setSelectedMovies((prevSelectedMovies) => {
-      if (
-        prevSelectedMovies.some((movie) => movie.name === selectedMovie.name)
-      ) {
-        // If the movie is already selected, remove it
+      const isSelected = prevSelectedMovies.some(
+        (movie) => movie.name === selectedMovie.name
+      );
+
+      if (isSelected) {
+        // Deselect movie if already selected
         return prevSelectedMovies.filter(
           (movie) => movie.name !== selectedMovie.name
         );
       }
+
       if (prevSelectedMovies.length < 5) {
-        // Add movie to selected list if not selected and less than 5 movies are selected
+        // Select movie if less than 5 movies are selected
         return [...prevSelectedMovies, selectedMovie];
       }
       return prevSelectedMovies;
     });
   };
+
   return (
-    <div className="">
+    <div className="h-screen">
       {/* Progress Bar */}
-      <div className="ProgressBar">
-        <ProgressBar currentStep={4} />
-      </div>
+      <ProgressBar currentStep={4} />
+
       {/* Headers */}
-      <div className="heading text-center">
-        <h2 className="text-2xl mt-5 mb-3">Select your top 5 movies</h2>
-        <p className="text-balance text-gray-300 font-extralight">
+      <div className="Headers">
+        <Title title="Select your top 5 movies" />
+        <p className="text-balance text-gray-300 font-extralight text-center">
           Selecting your top 5 movies will enable us to suggest like-minded
-          users and <br /> nearby communities for exciting watch parties and
-          movie premiere gatherings.
+          users and <br />
+          nearby communities for exciting watch parties and movie premiere
+          gatherings.
         </p>
       </div>
-      {/* SearchBar */}
-      <div className="SearchBar">
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      </div>
-      {/* Movies */}
+
+      {/* Search Bar */}
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+
+      {/* Movies List */}
       <div className="mb-5">
         <div className="container mx-auto">
           <div className="text-xl mb-4 text-start ml-[13.3rem]">
             Movies you might like
           </div>
           <div className="flex justify-center space-x-6">
-            {filteredMovies.map((movie) => (
-              <div
-                key={movie.name}
-                className="text-center cursor-pointer relative"
-                onClick={() => handleMovieSelect(movie)}
-              >
+            {filteredMovies.map((movie) => {
+              const isSelected = selectedMovies.some(
+                (selectedMovie) => selectedMovie.name === movie.name
+              );
+
+              return (
                 <div
-                  className={`relative w-28 h-23 border-2 ${
-                    selectedMovies.some(
-                      (selectedMovie) => selectedMovie.name === movie.name
-                    )
-                      ? "border-yellow-400"
-                      : "border-transparent"
-                  }`}
+                  key={movie.name}
+                  className="text-center cursor-pointer relative"
+                  onClick={() => handleMovieSelect(movie)}
                 >
-                  <img
-                    src={movie.image}
-                    alt={movie.name}
-                    className="w-full h-full object-cover"
-                  />
-                  {selectedMovies.some(
-                    (selectedMovie) => selectedMovie.name === movie.name
-                  ) && (
-                    <div className="selected-indicator">
-                      <div className="circle"></div>
-                    </div>
-                  )}
+                  <div
+                    className={`relative w-28 h-23 border-2 ${
+                      isSelected ? "border-yellow-400" : "border-transparent"
+                    }`}
+                  >
+                    <img
+                      src={movie.image}
+                      alt={movie.name}
+                      className="w-full h-full object-cover"
+                    />
+                    {isSelected && (
+                      <div className="selected-indicator">
+                        <div className="circle"></div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-28 text-[15px] justify-center overflow-hidden font-thin mt-2">
+                    {movie.name}
+                  </div>
                 </div>
-                <div className="w-28 text-[15px] justify-center overflow-hidden font-thin mt-2">
-                  {movie.name}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
 
-      <div className="Top5Selection">
-        <TopFiveSelection
-          selectedMovies={selectedMovies}
-          handleMovieSelect={handleMovieSelect}
-        />
-      </div>
+      {/* Top 5 Selected Movies */}
+      <TopFiveSelection
+        selectedMovies={selectedMovies}
+        handleMovieSelect={handleMovieSelect}
+      />
     </div>
   );
 };
