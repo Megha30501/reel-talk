@@ -35,3 +35,33 @@
   background-color: white; 
   border: 2px solid black; 
 }
+
+.selected-indicator {
+  position: absolute;
+  top: 0.5rem; 
+  right: 0.5rem; 
+  width: 1rem; 
+  height: 1rem; 
+}
+
+.selected-indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.5rem; 
+  height: 0.75rem; 
+  border: solid black;
+  border-width: 0 0.15rem 0.15rem 0;
+  transform: rotate(45deg);
+  transform-origin: center;
+  margin-top: -0.4rem; 
+  margin-left: -0.25rem; 
+}
+
+.selected-indicator .circle {
+  width: 1rem; 
+  height: 1rem; 
+  background-color: #facc15; 
+  border-radius: 50%;
+}

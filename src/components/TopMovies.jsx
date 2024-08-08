@@ -10,7 +10,7 @@ import darkknight from "../assets/images/darkknight.png";
 
 const TopMovies = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovies, setSelectedMovies] = useState([]);
 
   const movies = [
     { name: "The Shawshank Redemption (1994)", image: shawshank },
@@ -25,6 +25,16 @@ const TopMovies = () => {
   const filteredMovies = movies.filter((movie) =>
     movie.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleMovieSelect = (movieName) => {
+    if (selectedMovies.includes(movieName)) {
+      // Remove movie from selected list if already selected
+      setSelectedMovies(selectedMovies.filter((name) => name !== movieName));
+    } else if (selectedMovies.length < 5) {
+      // Add movie to selected list if not selected and less than 5 movies are selected
+      setSelectedMovies([...selectedMovies, movieName]);
+    }
+  };
 
   return (
     <div className="">
@@ -55,12 +65,12 @@ const TopMovies = () => {
             {filteredMovies.map((movie) => (
               <div
                 key={movie.name}
-                className="text-center cursor-pointer"
-                onClick={() => setSelectedMovie(movie.name)}
+                className="text-center cursor-pointer relative"
+                onClick={() => handleMovieSelect(movie.name)}
               >
                 <div
                   className={`relative w-28 h-23 border-2 ${
-                    selectedMovie === movie.name
+                    selectedMovies.includes(movie.name)
                       ? "border-yellow-400"
                       : "border-transparent"
                   }`}
@@ -70,8 +80,10 @@ const TopMovies = () => {
                     alt={movie.name}
                     className="w-full h-full object-cover"
                   />
-                  {selectedMovie === movie.name && (
-                    <div className="absolute top-1 right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-yellow-500" />
+                  {selectedMovies.includes(movie.name) && (
+                    <div className="selected-indicator">
+                      <div className="circle"></div>
+                    </div>
                   )}
                 </div>
                 <div className="w-28 text-[15px] justify-center overflow-hidden font-thin mt-2">
