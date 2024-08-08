@@ -1,9 +1,8 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   return (
-    <div className="search-bar flex items-center justify-center mt-6 relative">
+    <div className="search-bar flex items-center justify-center mt-6 mb-6 relative">
       <input
         type="text"
         placeholder="Search"
