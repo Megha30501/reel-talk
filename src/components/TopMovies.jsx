@@ -27,16 +27,23 @@ const TopMovies = () => {
     movie.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleMovieSelect = (movieName) => {
-    if (selectedMovies.includes(movieName)) {
-      // Remove movie from selected list if already selected
-      setSelectedMovies(selectedMovies.filter((name) => name !== movieName));
-    } else if (selectedMovies.length < 5) {
-      // Add movie to selected list if not selected and less than 5 movies are selected
-      setSelectedMovies([...selectedMovies, movieName]);
-    }
+  const handleMovieSelect = (selectedMovie) => {
+    setSelectedMovies((prevSelectedMovies) => {
+      if (
+        prevSelectedMovies.some((movie) => movie.name === selectedMovie.name)
+      ) {
+        // If the movie is already selected, remove it
+        return prevSelectedMovies.filter(
+          (movie) => movie.name !== selectedMovie.name
+        );
+      }
+      if (prevSelectedMovies.length < 5) {
+        // Add movie to selected list if not selected and less than 5 movies are selected
+        return [...prevSelectedMovies, selectedMovie];
+      }
+      return prevSelectedMovies;
+    });
   };
-
   return (
     <div className="">
       {/* Progress Bar */}
@@ -67,11 +74,13 @@ const TopMovies = () => {
               <div
                 key={movie.name}
                 className="text-center cursor-pointer relative"
-                onClick={() => handleMovieSelect(movie.name)}
+                onClick={() => handleMovieSelect(movie)}
               >
                 <div
                   className={`relative w-28 h-23 border-2 ${
-                    selectedMovies.includes(movie.name)
+                    selectedMovies.some(
+                      (selectedMovie) => selectedMovie.name === movie.name
+                    )
                       ? "border-yellow-400"
                       : "border-transparent"
                   }`}
@@ -81,7 +90,9 @@ const TopMovies = () => {
                     alt={movie.name}
                     className="w-full h-full object-cover"
                   />
-                  {selectedMovies.includes(movie.name) && (
+                  {selectedMovies.some(
+                    (selectedMovie) => selectedMovie.name === movie.name
+                  ) && (
                     <div className="selected-indicator">
                       <div className="circle"></div>
                     </div>
@@ -97,7 +108,7 @@ const TopMovies = () => {
       </div>
 
       <div className="Top5Selection">
-        <TopFiveSelection />
+        <TopFiveSelection selectedMovies={selectedMovies} />
       </div>
     </div>
   );
