@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import SearchBar from "./SearchBar";
 import shawshank from "../assets/images/shawshank.png";
@@ -9,6 +9,8 @@ import flipped from "../assets/images/flipped.png";
 import darkknight from "../assets/images/darkknight.png";
 
 const TopMovies = () => {
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
   const movies = [
     { name: "The Shawshank Redemption (1994)", image: shawshank },
     { name: "Inception (2010)", image: inception },
@@ -17,6 +19,7 @@ const TopMovies = () => {
     { name: "Flipped (2010)", image: flipped },
     { name: "The Dark Knight (2008)", image: darkknight },
   ];
+
   return (
     <div className="">
       {/* Progress Bar */}
@@ -44,13 +47,25 @@ const TopMovies = () => {
           </div>
           <div className="flex space-x-6 ml-48">
             {movies.map((movie) => (
-              <div key={movie.name} className="text-center">
-                <img
-                  src={movie.image}
-                  alt={movie.name}
-                  className="w-28 h-23 pb-1 "
-                />
-                <div className="w-28 text-[15px] justify-center overflow-hidden font-thin">
+              <div
+                key={movie.name}
+                className="text-center cursor-pointer"
+                onClick={() => setSelectedMovie(movie.name)}
+              >
+                <div
+                  className={`w-28 h-23 border-2 ${
+                    selectedMovie === movie.name
+                      ? "border-yellow-400"
+                      : "border-transparent"
+                  }`}
+                >
+                  <img
+                    src={movie.image}
+                    alt={movie.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-28 text-[15px] justify-center overflow-hidden font-thin mt-2">
                   {movie.name}
                 </div>
               </div>
