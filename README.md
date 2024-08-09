@@ -1,6 +1,6 @@
 ## Reel Talk
 
-### 🚀 Follow the steps below to run the code on your machine.
+### Follow the steps below to run the code on your machine.
 
 #### Setting Up Your Development Environment
 
@@ -38,7 +38,7 @@ The genre selection page is designed to be user-friendly, allowing you to easily
 **Data Structure:**
 - **Genres:** Each genre is defined as an object, encapsulating attributes like the genre's name and emoji representation.
 - **State Management:** React's state is utilized to keep track of which genres are selected and whether the full list is shown.
-- 
+  
 **Reusable Components:**
 - **ProgressBar:** Tracks and visually represents the user’s progress through different stages of genre selection.
 - **Title:** Displays clear and concise headings for different sections of the page.
@@ -58,17 +58,7 @@ The Top 5 Movies page is designed to help you pick your favorite movies easily. 
 - **State Management:** React's state is employed to track selected movies, limiting the selection to a maximum of five.
 
 **Reusable Components:**
-- **ProgressBar:** Continuously updates the user’s progress as they make their selections.
+- **ProgressBar:** Continually updates to show the user’s progress.
 - **Title:** Provides headings that clearly define the purpose of each section or page.
-- **SearchBar:** Allows users to search for movies efficiently, simplifying the selection process.
-- **TopMovies:** Map all selected images by user and show it to the dotted box.
-
-
-
-
-
-
-
-
-
-
+- **SearchBar:** Helps users search for movies quickly and easily.
+- **TopMovies:** Displays all selected movies in a neat and organized way.
