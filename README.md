@@ -1,8 +1,23 @@
-# React + Vite
+# Reel Talk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Getting Started
 
-Currently, two official plugins are available:
+### Setting Up Your Development Environment
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install and configure Git
+2. Install Node (v18.12.1)
+3. Install the IDE of your choice (Webstorm, VS code, etc.)
+
+### Downloading and Running the Project
+
+#### Step 1: Connect and Clone
+- Connect to GitHub and clone the repository in your local using the command: `https://github.com/Megha30501/reel-talk`
+#### Step 2: Run the Application Locally
+
+
+##### 2.1 Run Frontend
+
+- Navigate to the `REEL-TALK` folder.
+- Run `npm install` to install all the project's dependencies
+- Execute the command `npm run dev`. It will start the node server at `http://localhost:5173`.
+
