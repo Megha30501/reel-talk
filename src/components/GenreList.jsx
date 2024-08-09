@@ -75,7 +75,7 @@ const GenreList = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-screen flex flex-col justify-between pl-6 pr-6">
       {/* ProgessBar */}
       <div className="ProgressBar">
         <ProgressBar currentStep={3} />
@@ -96,6 +96,14 @@ const GenreList = () => {
                 selectedGenres[genre.name]
                   ? "bg-yellow-500 border-none"
                   : "bg-gray-100"
+              } ${
+                index === genres.length - 3
+                  ? "lg:col-start-2"
+                  : index === genres.length - 2
+                  ? "lg:col-start-3"
+                  : index === genres.length - 1
+                  ? "lg:col-start-4"
+                  : ""
               }`}
             >
               {/* displaying name of genre and emoji */}
@@ -118,13 +126,13 @@ const GenreList = () => {
         {/* buttons */}
         <div className="flex justify-center space-between mt-8">
           {/* Back Button */}
-          <button className="text-white py-2 px-20 rounded border-2 border-slate-100">
+          <button className="text-white py-2 px-36 rounded border-2 border-slate-100">
             Back
           </button>
           <span className="mx-2" />
           {/* Next Button */}
           <button
-            className={` py-2 px-20 rounded ${
+            className={` py-2 px-36 rounded ${
               isNextEnabled
                 ? "bg-yellow-400 cursor-pointer font-bold text-black"
                 : "bg-gray-400 cursor-not-allowed text-white"
