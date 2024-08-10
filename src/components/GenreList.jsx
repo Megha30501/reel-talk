@@ -75,7 +75,7 @@ const GenreList = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-between pl-6 pr-6">
+    <div className="h-screen flex flex-col pl-6 pr-6">
       {/* ProgessBar */}
       <div className="ProgressBar">
         <ProgressBar currentStep={3} />
