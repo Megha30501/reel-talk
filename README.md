@@ -62,3 +62,7 @@ The Top 5 Movies page is designed to help you pick your favorite movies easily. 
 - **Title:** Provides headings that clearly define the purpose of each section or page.
 - **SearchBar:** Helps users search for movies quickly and easily.
 - **TopMovies:** Displays all selected movies in a neat and organized way.
+
+### Video:
+https://github.com/user-attachments/assets/8744a0e0-9d92-47b2-b752-d640a8e1f313
+
