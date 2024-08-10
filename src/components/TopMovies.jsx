@@ -51,14 +51,14 @@ const TopMovies = () => {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen text-white">
       {/* Progress Bar */}
       <ProgressBar currentStep={4} />
 
       {/* Headers */}
       <div className="Headers">
         <Title title="Select your top 5 movies" />
-        <p className="text-balance text-gray-300 font-extralight text-center">
+        <p className="text-balance text-gray-300 font-extralight text-center mb-8">
           Selecting your top 5 movies will enable us to suggest like-minded
           users and <br />
           nearby communities for exciting watch parties and movie premiere
@@ -72,10 +72,10 @@ const TopMovies = () => {
       {/* Movies List */}
       <div className="mb-5">
         <div className="container mx-auto">
-          <div className="text-xl mb-4 text-start ml-[13.3rem]">
+          <div className="text-xl mb-4 text-start ml-[13.3rem] text-white">
             Movies you might like
           </div>
-          <div className="flex justify-center space-x-6">
+          <div className="flex justify-center space-x-6 text-white">
             {filteredMovies.map((movie) => {
               const isSelected = selectedMovies.some(
                 (selectedMovie) => selectedMovie.name === movie.name
@@ -95,7 +95,7 @@ const TopMovies = () => {
                     <img
                       src={movie.image}
                       alt={movie.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover "
                     />
                     {isSelected && (
                       <div className="selected-indicator">
